@@ -1,6 +1,7 @@
 from django.db import models
 from blog.models import User
 
+
 class Link(models.Model):
     status_normal = 1
     status_delete = 0
@@ -20,6 +21,7 @@ class Link(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "友链"
+
 
 class SideBar(models.Model):
     status_normal = 1
