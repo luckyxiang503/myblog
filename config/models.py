@@ -1,6 +1,6 @@
 from django.db import models
 from blog.models import User
-
+from django.template.loader import render_to_string
 
 class Link(models.Model):
     status_normal = 1
@@ -30,11 +30,15 @@ class SideBar(models.Model):
         (status_normal, "正常"),
         (status_delete, "删除"),
     )
+    display_html = 1
+    display_latest = 2
+    display_hot = 3
+    display_comment = 4
     side_type = (
-        (1, "HTML"),
-        (2, "最新文章"),
-        (3, "最热文章"),
-        (4, "最新评论")
+        (display_html, "HTML"),
+        (display_latest, "最新文章"),
+        (display_hot, "最热文章"),
+        (display_comment, "最新评论")
     )
 
     title = models.CharField(max_length=50, verbose_name="标题")
@@ -46,3 +50,32 @@ class SideBar(models.Model):
 
     class Meta:
         verbose_name = verbose_name_plural = "侧边栏"
+
+    @classmethod
+    def get_all(cls):
+        return cls.objects.filter(status=cls.status_normal)
+
+    @property
+    def content_html(self):
+        from blog.models import Post
+        from comment.models import Comment
+
+        result = ''
+        if self.display_type == self.display_html:
+            result = self.content
+        elif self.display_type == self.display_latest:
+            context = {
+                'posts': Post.latest_posts()
+            }
+            result = render_to_string('config/sidebar_post.html', context=context)
+        elif self.display_type == self.display_hot:
+            context = {
+                'posts': Post.hot_posts()
+            }
+            result = render_to_string('config/sidebar_post.html', context=context)
+        elif self.display_type == self.display_comment:
+            context = {
+                'comments': Comment.objects.filter(status=Comment.status_normal).select_related('target')
+            }
+            result = render_to_string('config/sidebar_comment.html', context=context)
+        return result
