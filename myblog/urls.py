@@ -21,11 +21,11 @@ from config.views import links
 
 
 urlpatterns = [
-    path('', post_list),
-    re_path(r'^category/(?P<category_id>\d+)/$', post_list),
-    re_path(r'^tag/(?P<tag_id>\d+)/$', post_list),
-    re_path(r'^post/(?P<post_id>\d+).html$', post_detail),
-    re_path(r'^links/$', links),
+    path('', post_list, name='index'),
+    re_path(r'^category/(?P<category_id>\d+)/$', post_list, name='category_list'),
+    re_path(r'^tag/(?P<tag_id>\d+)/$', post_list, name='tag_list'),
+    re_path(r'^post/(?P<post_id>\d+).html$', post_detail, name='post_detail'),
+    re_path(r'^links/$', links, name='links'),
 
     path('admin/', admin.site.urls),
 ]
