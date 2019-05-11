@@ -79,3 +79,6 @@ class SideBar(models.Model):
             }
             result = render_to_string('config/sidebar_comment.html', context=context)
         return result
+
+    def __str__(self):
+        return self.title
