@@ -84,6 +84,7 @@ class TagView(IndexView):
         context.update({
             'tag': tag,
         })
+        return context
 
     def get_queryset(self):
         """ 重写queryset,根据标签过滤 """
