@@ -5,7 +5,7 @@ from django.views.generic import ListView, DetailView
 from .models import Post, Category, Tag
 from config.models import SideBar
 
-
+app_name = 'blog'
 # 函数 views
 # def post_list(request, category_id=None, tag_id=None):
 #     category = None

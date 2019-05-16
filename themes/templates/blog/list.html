@@ -13,10 +13,10 @@
     {% for post in post_list %}
     <div class="card post">
         <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h5>
+            <h5 class="card-title"><a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a></h5>
             <span class="card-link">作者：<a href="#"></a>{{ post.owner }}</span>
-            <span class="card-link">分类：<a href="{% url 'category_list' post.category.id %}">{{ post.category.name }}</a></span>
-            <p class="card-text">{{ post.desc }}<a href="{% url 'post_detail' post.id %}">完整内容</a></p>
+            <span class="card-link">分类：<a href="{% url 'blog:category_list' post.category.id %}">{{ post.category.name }}</a></span>
+            <p class="card-text">{{ post.desc }}<a href="{% url 'blog:post_detail' post.id %}">完整内容</a></p>
         </div>
     </div>
     {% endfor %}

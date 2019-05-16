@@ -1,6 +1,7 @@
 from django.db import models
 from blog.models import Post
 
+
 class Comment(models.Model):
     status_normal = 1
     status_delete = 0

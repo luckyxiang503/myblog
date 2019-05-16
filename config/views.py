@@ -1,6 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import View
 
-# Create your views here.
+app_name = 'config'
 
-def links(request):
-    pass
+
+class LinkView(View):
+    def post(self, request):
+        pass
+
+    def get(self, request):
+        pass
