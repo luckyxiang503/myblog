@@ -13,4 +13,5 @@ urlpatterns = [
     re_path(r'^tag/(?P<tag_id>\d+)/$', TagView.as_view(), name='tag_list'),
     re_path(r'^post/(?P<post_id>\d+).html$', PostDetailView.as_view(), name='post_detail'),
     re_path(r'^search/$', SearchView.as_view(), name='search'),
+    path('create_post', CreatePostView.as_view(), name='create_post')
 ]

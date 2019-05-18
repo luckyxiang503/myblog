@@ -22,6 +22,9 @@
                     <a href="{% url 'blog:category_list' cate.id %}" class="nav-link">{{ cate.name }}</a>
                 </li>
                 {% endfor %}
+                <li class="nav-item">
+                    <a href="{% url 'blog:create_post' %}" class="nav-link">写文章</a>
+                </li>
             </ul>
             <form action="{% url 'blog:search' %}" method="GET" class="form-inline my-2 my-lg-0">
                 <input class="form-comtrol mr-sm-2" type="search" name="keyword" placeholder="Search" aria-label="Search" value="{{ keyword }}">
@@ -59,7 +62,6 @@
 <footer class="footer">
     {% block footer %}
     <div class="container">
-        <hr>
         <nav class="nav category">
             {% for cate in categories %}
                 <a href="{% url 'blog:category_list' cate.id %}">{{ cate.name }}</a>

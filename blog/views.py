@@ -1,6 +1,6 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, HttpResponse
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, View
 
 from .models import Post, Category, Tag
 from config.models import SideBar
@@ -115,3 +115,15 @@ class SearchView(IndexView):
             return queryset
         queryset = queryset.filter(Q(title__icontains=keyword) | Q(desc__icontains=keyword))
         return queryset
+
+
+class CreatePostView(View):
+    def get(self, request):
+        categories = Category.objects.filter(status=Category.status_normal, is_nav=False)
+        context = {
+            'categories': categories,
+        }
+        return render(request, 'blog/create.html', context=context)
+
+    def post(self, request, *args, **kwargs):
+        return HttpResponse('提交成功')
